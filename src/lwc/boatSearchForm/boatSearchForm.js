@@ -2,8 +2,8 @@
  * Created by user on 02.09.2020.
  */
 import { LightningElement, track, wire, api } from 'lwc';
-import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
-import getAllBoatTypes from "@salesforce/apex/BoatDataService.getBoatTypes";
+/*import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';*/
+import getBoatTypes from "@salesforce/apex/BoatDataService.getBoatTypes";
 
 export default class BoatSearchForm extends LightningElement {
     selectedBoatTypeId = '';
@@ -15,13 +15,8 @@ export default class BoatSearchForm extends LightningElement {
     @track
     searchOptions = '';
 
-    connectedCallback() {
-        console.log('init');
-        return getAllBoatTypes();
-    }
-
     // Wire a custom Apex method
-    @wire(getAllBoatTypes)
+    @wire(getBoatTypes)
     boatTypes({ error, data }) {
         if (data) {
             this.searchOptions = data.map(type => {
@@ -36,6 +31,7 @@ export default class BoatSearchForm extends LightningElement {
             this.searchOptions = undefined;
             this.error = error;
         }
+        //console.log('s'+ JSON.stringify(this.searchOptions));
     }
 
     // Fires event that the search option has changed.
@@ -44,7 +40,11 @@ export default class BoatSearchForm extends LightningElement {
 
         // Create the const searchEvent
         // searchEvent must be the new custom event search
-        const searchEvent = new CustomEvent('search', {'boatTypeId': this.selectedBoatTypeId});
+
+        this.selectedBoatTypeId = event.detail.value;
+        console.log(this.selectedBoatTypeId);
+        const searchEvent = new CustomEvent('search', {
+            detail: { boatTypeId: this.selectedBoatTypeId }});
         this.dispatchEvent(searchEvent);
     }
 }
