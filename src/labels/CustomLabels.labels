@@ -40,4 +40,18 @@
         <shortDescription>Reviews</shortDescription>
         <value>Reviews</value>
     </labels>
+    <labels>
+        <fullName>TILE_WRAPPER_SELECTED_CLASS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TILE_WRAPPER_SELECTED_CLASS</shortDescription>
+        <value>tile-wrapper selected</value>
+    </labels>
+    <labels>
+        <fullName>TILE_WRAPPER_UNSELECTED_CLASS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>tile-wrapper</shortDescription>
+        <value>tile-wrapper</value>
+    </labels>
 </CustomLabels>
